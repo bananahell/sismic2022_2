@@ -10,6 +10,8 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
+"./exp1.obj" \
+"./exp2.obj" \
 "./main.obj" \
 "../lnk_msp430f5529.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -155,8 +157,8 @@ enigma.hex: $(EXE_OUTPUTS)
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "main.obj" 
-	-$(RM) "main.d" 
+	-$(RM) "exp1.obj" "exp2.obj" "main.obj" 
+	-$(RM) "exp1.d" "exp2.d" "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

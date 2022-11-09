@@ -24,6 +24,11 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 
+			.ref EXP1, EXP2
+ENIGMA:
+			call #EXP1
+			call #EXP2
+			jmp $
 			nop
 
 ;-------------------------------------------------------------------------------
