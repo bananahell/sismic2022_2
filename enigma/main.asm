@@ -4,7 +4,7 @@
 ;
 ;-------------------------------------------------------------------------------
             .cdecls C,LIST,"msp430.h"       ; Include device header file
-            
+
 ;-------------------------------------------------------------------------------
             .def    RESET                   ; Export program entry-point to
                                             ; make it known to linker.
@@ -24,22 +24,22 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 
-			.ref EXP1, EXP2
+            .ref EXP1, EXP2
 ENIGMA:
-			call #EXP1
-			call #EXP2
-			jmp $
-			nop
+            call    #EXP1
+            call    #EXP2
+            jmp     $
+            nop
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
 ;-------------------------------------------------------------------------------
             .global __STACK_END
             .sect   .stack
-            
+
 ;-------------------------------------------------------------------------------
 ; Interrupt Vectors
 ;-------------------------------------------------------------------------------
             .sect   ".reset"                ; MSP430 RESET Vector
             .short  RESET
-            
+
