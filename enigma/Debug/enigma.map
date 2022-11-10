@@ -1,10 +1,10 @@
 ******************************************************************************
-                  MSP430 Linker PC v18.12.8                    
+                  MSP430 Linker Unix v21.6.1                   
 ******************************************************************************
->> Linked Wed Nov  9 19:09:54 2022
+>> Linked Thu Nov 10 10:32:56 2022
 
 OUTPUT FILE NAME:   <enigma.out>
-ENTRY POINT SYMBOL: "RESET"  address: 000044c6
+ENTRY POINT SYMBOL: "RESET"  address: 000044c8
 
 
 MEMORY CONFIGURATION
@@ -20,7 +20,7 @@ MEMORY CONFIGURATION
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   USBRAM                00001c00   00000800  00000000  00000800  RWIX
   RAM                   00002400   00002000  00000068  00001f98  RWIX
-  FLASH                 00004400   0000bb80  000000e4  0000ba9c  RWIX
+  FLASH                 00004400   0000bb80  000000e6  0000ba9a  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -85,7 +85,7 @@ MEMORY CONFIGURATION
   INT61                 0000fffa   00000002  00000002  00000000  RWIX
   INT62                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FLASH2                00010000   00014400  00000000  00014400  RWIX
+  FLASH2                00010000   000143f8  00000000  000143f8  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -99,14 +99,14 @@ section   page    origin      length       input sections
 
 .stack     0    00004400    00000000     
 
-.text      0    00004400    000000dc     
-                  00004400    0000008e     exp2.obj (.text)
-                  0000448e    00000038     exp1.obj (.text)
-                  000044c6    00000016     main.obj (.text)
+.text      0    00004400    000000de     
+                  00004400    00000090     exp2.obj (.text)
+                  00004490    00000038     exp1.obj (.text)
+                  000044c8    00000016     main.obj (.text)
 
 .text:_isr 
-*          0    000044dc    00000008     
-                  000044dc    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    000044de    00000008     
+                  000044de    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .cinit     0    00004400    00000000     UNINITIALIZED
 
@@ -196,14 +196,14 @@ MODULE SUMMARY
 
        Module             code   ro data   rw data
        ------             ----   -------   -------
-    .\
-       exp2.obj           142    0         66     
+    ./
+       exp2.obj           144    0         66     
        exp1.obj           56     0         38     
        main.obj           22     2         0      
     +--+------------------+------+---------+---------+
-       Total:             220    2         104    
+       Total:             222    2         104    
                                                   
-    C:\ti\ccs930\ccs\tools\compiler\ti-cgt-msp430_18.12.8.LTS\lib\rts430x_sc_sd_eabi.lib
+    /home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib/rts430x_sc_sd_eabi.lib
        isr_trap.asm.obj   8      0         0      
        int41.asm.obj      0      2         0      
        int42.asm.obj      0      2         0      
@@ -231,7 +231,7 @@ MODULE SUMMARY
        Total:             8      44        0      
                                                   
     +--+------------------+------+---------+---------+
-       Grand Total:       228    46        104    
+       Grand Total:       230    46        104    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -378,7 +378,7 @@ address   name
 00000506  DMACTL3             
 00000508  DMACTL4             
 0000050e  DMAIV               
-0000448e  EXP1                
+00004490  EXP1                
 00004400  EXP2                
 00000140  FCTL1               
 00000141  FCTL1_H             
@@ -586,7 +586,7 @@ address   name
 000004ea  RES3                
 000004eb  RES3_H              
 000004ea  RES3_L              
-000044c6  RESET               
+000044c8  RESET               
 000004cc  RESHI               
 000004cd  RESHI_H             
 000004cc  RESHI_L             
@@ -973,7 +973,7 @@ address   name
 0000015c  WDTCTL_L            
 00004400  __STACK_END         
 00000000  __STACK_SIZE        
-000044dc  __TI_ISR_TRAP       
+000044de  __TI_ISR_TRAP       
 0000ffd2  __TI_int41          
 0000ffd4  __TI_int42          
 0000ffd6  __TI_int43          
@@ -1739,9 +1739,9 @@ address   name
 000023ff  USBIEPSIZXY_7       
 00004400  EXP2                
 00004400  __STACK_END         
-0000448e  EXP1                
-000044c6  RESET               
-000044dc  __TI_ISR_TRAP       
+00004490  EXP1                
+000044c8  RESET               
+000044de  __TI_ISR_TRAP       
 0000ffd2  __TI_int41          
 0000ffd4  __TI_int42          
 0000ffd6  __TI_int43          

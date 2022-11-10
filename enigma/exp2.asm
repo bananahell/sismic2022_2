@@ -73,6 +73,7 @@ ENIGMA2:
 EXP2_QUIT:
             pop     R3                      ; Tiro o refletor da pilha
             pop     R3                      ; Tiro o rotor da pilha
+            pop     R3                      ; Tiro o anti-rotor da pilha
             pop     R12
             pop     R11
             pop     R10
