@@ -7,7 +7,7 @@
 MENOR:
             push    R14
             push    R15
-            mov.b   #0x7F, R14
+            mov.b   #0xFF, R14
             mov.w   #0, R15
 MENOR_LOOP:
             cmp.w   #0, R13
@@ -15,7 +15,7 @@ MENOR_LOOP:
             dec.w   R13
             cmp.b   @R12, R14
             jeq     MENOR_EQUAL
-            jl      MENOR_MENOR
+            jlo     MENOR_MENOR
             mov.b   @R12+, R14
             mov.w   #1, R15
             jmp     MENOR_LOOP

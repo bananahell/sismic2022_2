@@ -8,9 +8,6 @@ GEN_OPTS__FLAG :=
 GEN_CMDS__FLAG := 
 
 ORDERED_OBJS += \
-"./exp1.obj" \
-"./exp2.obj" \
-"./exp3.obj" \
 "./main.obj" \
 "../lnk_msp430f5529.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -122,42 +119,42 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-enigma.out \
+sandbox.out \
 
 EXE_OUTPUTS__QUOTED += \
-"enigma.out" \
+"sandbox.out" \
 
 BIN_OUTPUTS += \
-enigma.hex \
+sandbox.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"enigma.hex" \
+"sandbox.hex" \
 
 
 # All Target
 all: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
-	@$(MAKE) --no-print-directory -Onone "enigma.out"
+	@$(MAKE) --no-print-directory -Onone "sandbox.out"
 
 # Tool invocations
-enigma.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
+sandbox.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: MSP430 Linker'
-	"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 -z -m"enigma.map" --heap_size=0 --stack_size=0 --cinit_hold_wdt=on -i"/home/bj/ti/ccs1210/ccs/ccs_base/msp430/include" -i"/home/bj/ti/ccs1210/ccs/ccs_base/msp430/lib/5xx_6xx_FRxx" -i"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib" -i"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="enigma_linkInfo.xml" --entry_point=RESET --use_hw_mpy=F5 -o "enigma.out" $(ORDERED_OBJS)
+	"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/cl430" -vmspx --code_model=small --data_model=small --use_hw_mpy=F5 --advice:power=all --define=__MSP430F5529__ -g --printf_support=minimal --diag_warning=225 --diag_wrap=off --display_error_number --silicon_errata=CPU21 --silicon_errata=CPU22 --silicon_errata=CPU23 --silicon_errata=CPU40 -z -m"sandbox.map" --heap_size=0 --stack_size=0 --cinit_hold_wdt=on -i"/home/bj/ti/ccs1210/ccs/ccs_base/msp430/include" -i"/home/bj/ti/ccs1210/ccs/ccs_base/msp430/lib/5xx_6xx_FRxx" -i"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib" -i"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/include" --reread_libs --diag_wrap=off --display_error_number --warn_sections --xml_link_info="sandbox_linkInfo.xml" --entry_point=RESET --use_hw_mpy=F5 -o "sandbox.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-enigma.hex: $(EXE_OUTPUTS)
+sandbox.hex: $(EXE_OUTPUTS)
 	@echo 'Building secondary target: "$@"'
 	@echo 'Invoking: MSP430 Hex Utility'
-	"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/hex430" --memwidth=8 --romwidth=8 --diag_wrap=off -o "enigma.hex" $(EXE_OUTPUTS__QUOTED)
+	"/home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/bin/hex430" --memwidth=8 --romwidth=8 --diag_wrap=off -o "sandbox.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
 # Other Targets
 clean:
 	-$(RM) $(BIN_OUTPUTS__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "exp1.obj" "exp2.obj" "exp3.obj" "main.obj" 
-	-$(RM) "exp1.d" "exp2.d" "exp3.d" "main.d" 
+	-$(RM) "main.obj" 
+	-$(RM) "main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

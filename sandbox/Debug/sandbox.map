@@ -1,9 +1,9 @@
 ******************************************************************************
                   MSP430 Linker Unix v21.6.1                   
 ******************************************************************************
->> Linked Thu Nov 10 17:54:24 2022
+>> Linked Thu Nov 17 13:33:29 2022
 
-OUTPUT FILE NAME:   <modulo01_2.out>
+OUTPUT FILE NAME:   <sandbox.out>
 ENTRY POINT SYMBOL: "RESET"  address: 00004400
 
 
@@ -19,8 +19,8 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   USBRAM                00001c00   00000800  00000000  00000800  RWIX
-  RAM                   00002400   00002000  0000000e  00001ff2  RWIX
-  FLASH                 00004400   0000bb80  0000009c  0000bae4  RWIX
+  RAM                   00002400   00002000  00000006  00001ffa  RWIX
+  FLASH                 00004400   0000bb80  00000034  0000bb4c  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -93,19 +93,17 @@ SECTION ALLOCATION MAP
  output                                  attributes/
 section   page    origin      length       input sections
 --------  ----  ----------  ----------   ----------------
-.data      0    00002400    0000000e     
-                  00002400    0000000e     main.obj (.data)
+.data      0    00002400    00000006     
+                  00002400    00000006     main.obj (.data)
 
 .stack     0    00004400    00000000     
 
-.text      0    00004400    00000094     
-                  00004400    00000036     main.obj (.text)
-                  00004436    00000030     ex14.obj (.text)
-                  00004466    0000002e     ex13.obj (.text)
+.text      0    00004400    0000002c     
+                  00004400    0000002c     main.obj (.text)
 
 .text:_isr 
-*          0    00004494    00000008     
-                  00004494    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+*          0    0000442c    00000008     
+                  0000442c    00000008     rts430x_sc_sd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .cinit     0    00004400    00000000     UNINITIALIZED
 
@@ -196,11 +194,9 @@ MODULE SUMMARY
        Module             code   ro data   rw data
        ------             ----   -------   -------
     ./
-       main.obj           54     2         14     
-       ex14.obj           48     0         0      
-       ex13.obj           46     0         0      
+       main.obj           44     2         6      
     +--+------------------+------+---------+---------+
-       Total:             148    2         14     
+       Total:             44     2         6      
                                                   
     /home/bj/ti/ccs1210/ccs/tools/compiler/ti-cgt-msp430_21.6.1.LTS/lib/rts430x_sc_sd_eabi.lib
        isr_trap.asm.obj   8      0         0      
@@ -230,7 +226,7 @@ MODULE SUMMARY
        Total:             8      44        0      
                                                   
     +--+------------------+------+---------+---------+
-       Grand Total:       156    46        14     
+       Grand Total:       52     46        6      
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -404,8 +400,6 @@ address   name
 000004c6  MACS_L              
 000004c5  MAC_H               
 000004c4  MAC_L               
-00004436  MAIOR16             
-00004466  MENOR               
 000004c0  MPY                 
 000004ec  MPY32CTL0           
 000004ed  MPY32CTL0_H         
@@ -972,7 +966,7 @@ address   name
 0000015c  WDTCTL_L            
 00004400  __STACK_END         
 00000000  __STACK_SIZE        
-00004494  __TI_ISR_TRAP       
+0000442c  __TI_ISR_TRAP       
 0000ffd2  __TI_int41          
 0000ffd4  __TI_int42          
 0000ffd6  __TI_int43          
@@ -1738,9 +1732,7 @@ address   name
 000023ff  USBIEPSIZXY_7       
 00004400  RESET               
 00004400  __STACK_END         
-00004436  MAIOR16             
-00004466  MENOR               
-00004494  __TI_ISR_TRAP       
+0000442c  __TI_ISR_TRAP       
 0000ffd2  __TI_int41          
 0000ffd4  __TI_int42          
 0000ffd6  __TI_int43          
@@ -1768,4 +1760,4 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start
 ffffffff  __c_args__          
 
-[762 symbols]
+[760 symbols]

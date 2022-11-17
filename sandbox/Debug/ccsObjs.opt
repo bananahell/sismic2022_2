@@ -1,6 +1,3 @@
-"./exp1.obj"
-"./exp2.obj"
-"./exp3.obj"
 "./main.obj"
 "../lnk_msp430f5529.cmd"
 -llibmath.a
