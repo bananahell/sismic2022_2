@@ -13,8 +13,8 @@
             .text
             .def EXP3
 
-EXP3_RT_TAM:.equ    6
-EXP3_CONF1: .equ    1
+EXP3_RT_TAM:.equ    26
+EXP3_CONF1: .equ    13
 
 EXP3:
             push    R5
@@ -37,7 +37,7 @@ EXP3:
 EXP3_ANTIGEN:
             cmp.w   #0, R5                  ; Se zero, acabaram rotores
             jz      ENIGMA3_START
-            mov.w   #6, R6                  ; Tam dos rotores
+            mov.w   #EXP3_RT_TAM, R6        ; Tam dos rotores
             mov.w   @R7, R9                 ; Endereco na memo do rotor
             mov.w   @R8, R10                ; Endereco na memo do anti-rotor
             mov.w   #0, R12                 ; Contador
@@ -63,7 +63,7 @@ ENIGMA3:
             sub.w   #65, R7                 ; Subtraio por 'A'
             add.w   #EXP3_CONF1, R7         ; Coloco a letra na config
             cmp.w   #EXP3_RT_TAM, R7
-            jl      ENIGMA3_CONFIG_IN          ; Checa se eh maior que o maximo
+            jl      ENIGMA3_CONFIG_IN       ; Checa se eh maior que o maximo
             sub.w   #EXP3_RT_TAM, R7        ; Subtrai do maximo se sim
 ENIGMA3_CONFIG_IN:
             add.w   2(SP), R7               ; Acho o endereco no rotor
@@ -74,8 +74,8 @@ ENIGMA3_CONFIG_IN:
             mov.b   @R7, R7                 ; Pego o valor do anti-rotor
             sub.w   #EXP3_CONF1, R7         ; Coloco a letra na config de novo
             cmp.w   #0, R7
-            jge     ENIGMA3_CONFIG_OUT         ; Checa se eh menor que o minimo
-            add.w   #EXP3_RT_TAM, R7        ; Subtrai do maximo se sim
+            jge     ENIGMA3_CONFIG_OUT      ; Checa se eh maior que zero
+            add.w   #EXP3_RT_TAM, R7        ; Soma do maximo se sim
 ENIGMA3_CONFIG_OUT:
             add.w   #65, R7                 ; Somo 'A' de novo
             mov.b   R7, 0(R6)
@@ -103,8 +103,8 @@ ENIGMA3_DCF_CONFIG_IN:
             mov.b   @R7, R7                 ; Pego o valor do anti-rotor
             sub.w   #EXP3_CONF1, R7         ; Coloco a letra na config de novo
             cmp.w   #0, R7
-            jge     ENIGMA3_DCF_CONFIG_OUT  ; Checa se eh menor que o minimo
-            add.w   #EXP3_RT_TAM, R7        ; Subtrai do maximo se sim
+            jge     ENIGMA3_DCF_CONFIG_OUT  ; Checa se eh maior que zero
+            add.w   #EXP3_RT_TAM, R7        ; Soma do maximo se sim
 ENIGMA3_DCF_CONFIG_OUT:
             add.w   #65, R7                 ; Somo 'A' de novo
             mov.b   R7, 0(R6)
@@ -127,11 +127,12 @@ EXP3_QUIT:
 
             .data
 
-EXP3_MSG:   .byte   "CABECAFEFACAFAD", 0    ; Mensagem em claro
-EXP3_GSM:   .byte   "XXXXXXXXXXXXXXX", 0    ; Mensagem cifrada
-EXP3_DCF:   .byte   "XXXXXXXXXXXXXXX", 0    ; Mensagem decifrada
-EXP3_RT1:   .byte   2, 4, 1, 5, 3, 0        ; Trama do Rotor
-EXP3_ART1:  .byte   0, 0, 0, 0, 0, 0        ; Trama do Anti-Rotor
-EXP3_RF1:   .byte   3, 5, 4, 0, 2, 1        ; Tabela do Refletor
-
-; Resposta: DBAFDBEFEBDBEBC
+EXP3_MSG:   .byte   "ESSAMENSAGEMEHUMTESTESOCOMLETRAMAIUSCULA", 0
+EXP3_GSM:   .byte   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 0
+EXP3_DCF:   .byte   "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", 0
+EXP3_RT1:   .byte   4, 13, 22, 2, 10, 11, 17, 0, 23, 5, 15, 21, 1, 9, 14, 3
+            .byte   25, 16, 6, 12, 20, 8, 19, 7, 24, 18
+EXP3_ART1:  .byte   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            .byte   0, 0, 0, 0, 0, 0, 0
+EXP3_RF1:   .byte   20, 13, 25, 4, 3, 10, 21, 12, 24, 16, 5, 22, 7, 1, 17, 18
+            .byte   9, 14, 15, 23, 0, 6, 11, 19, 8, 2
