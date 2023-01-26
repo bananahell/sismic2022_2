@@ -1,5 +1,23 @@
 #include <msp430.h>
 
+#define A_CLK 0
+
+// HALF_MSEC = (0.5 / 1000) * CLK_FREQ
+// TWOHALF_MSEC = (2.5 / 1000) * CLK_FREQ
+#if A_CLK == 0
+#define CLK_FREQ 32768
+#define CLK_HALF_MSEC 17
+#define CLK_TWOHALF_MSEC 81
+#define CLK_SEL TASSEL__ACLK
+#define COUNTER_DELAY 50
+#else
+#define CLK_FREQ 1048576
+#define CLK_HALF_MSEC 525
+#define CLK_TWOHALF_MSEC 2621
+#define CLK_SEL TASSEL__SMCLK
+#define COUNTER_DELAY 4
+#endif
+
 void debounce() {
   volatile int i = 10000;
   while (i--) {}
@@ -30,11 +48,11 @@ void initConfig() {
   P1SEL |= BIT4;
 
   // Timer A0 com mode up e Aclk
-  TA0CTL = TASSEL__ACLK | MC__UP | TACLR;
+  TA0CTL = CLK_SEL | MC__UP | TACLR;
   TA0CCTL3 = OUTMOD_6;
 
-  TA0CCR0 = 655 - 1;
-  TA0CCR3 = 17 - 1;  // Vai de 81 - 1 a 17 - 1
+  TA0CCR0 = CLK_TWOHALF_MSEC + 1;
+  TA0CCR3 = CLK_HALF_MSEC - 1;
 }
 
 int main() {
@@ -49,14 +67,11 @@ int main() {
     while ((P2IN & BIT1) && (P1IN & BIT1)) {}
 
     if (!(P2IN & BIT1)) {
-      if (TA0CCR3 < 81) {
-        TA0CCR3++;
-      }
       P1OUT |= BIT0;
       debounce();
       counter = 0;
       while (!(P2IN & BIT1)) {
-        if ((TA0CCR3 < 81) && (counter % 100 == 0)) {
+        if ((TA0CCR3 < CLK_TWOHALF_MSEC) && (counter % COUNTER_DELAY == 0)) {
           TA0CCR3++;
         }
         counter++;
@@ -64,15 +79,11 @@ int main() {
       P1OUT &= ~BIT0;
 
     } else {
-      if (TA0CCR3 > 17) {
-        TA0CCR3--;
-      }
-      TA0CCR3--;
       P4OUT |= BIT7;
       debounce();
       counter = 0;
       while (!(P1IN & BIT1)) {
-        if ((TA0CCR3 > 17) && (counter % 100 == 0)) {
+        if ((TA0CCR3 > CLK_HALF_MSEC) && (counter % (COUNTER_DELAY * 4) == 0)) {
           TA0CCR3--;
         }
         counter++;
