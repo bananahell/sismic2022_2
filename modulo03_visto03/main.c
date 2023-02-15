@@ -29,7 +29,7 @@ int main() {
 
   initConfig();
 
-  uartPrint("hello world\n\0");
+  uartPrint("hello world\n\r\0");
 
   return 0;
 }

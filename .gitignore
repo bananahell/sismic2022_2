@@ -1,5 +1,8 @@
 /.metadata/
-/.jxbrowser-data/
+/.jxbrowser.userdata/
 /.tempFiles/
 dvt
 RemoteSystemsTempFiles
+*.settings
+*Debug
+*targetConfigs
