@@ -65,7 +65,7 @@ int8_t uartRead(char* str) {
   if (rx.size > 0) {
     uint8_t readChars = rx.size;
     while (rx.size) {
-      *str = rx.buffer[rx.read++];
+      *str++ = rx.buffer[rx.read++];
       rx.read &= 0x0F;
       rx.size--;
     }
@@ -78,19 +78,20 @@ int8_t uartRead(char* str) {
 int main() {
   WDTCTL = WDTPW | WDTHOLD;  // stop watchdog timer
 
-  int i;
-
   __delay_cycles(1000000);
 
   initConfig();
 
   __enable_interrupt();
 
-  for (i = 0; i < 5; i++) {
-    uartPrint("AT\r\n");
-  }
+  uartPrint("aloha\r\n");
 
-  while (1) {}
+  volatile uint8_t msg[10];
+
+  while (1) {
+    while (rx.size != 10) {}
+    uartRead(msg);
+  }
 }
 
 #pragma vector = USCI_A1_VECTOR
